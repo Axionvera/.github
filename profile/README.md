@@ -2,48 +2,241 @@
 
 # Axionvera
 
-### Open-source infrastructure for digital finance, developer tooling, automation, and protocol systems.
+### Infrastructure for programmable finance on Stellar.
 
-Axionvera is building a contributor-friendly technology ecosystem for wallets, payments, SDKs, dashboards, network infrastructure, automation workflows, and maintainable open-source systems.
+Axionvera is building developer infrastructure, financial primitives, SDKs, and application tooling for teams building on Stellar and Soroban.
 
-<br />
-
-![Open Source](https://img.shields.io/badge/Open%20Source-Yes-0E8A16?style=for-the-badge)
-![Developer Tools](https://img.shields.io/badge/Developer%20Tools-Axionvera-3178C6?style=for-the-badge)
-![Automation](https://img.shields.io/badge/Automation-GitHub%20Workflows-5319E7?style=for-the-badge)
-![Built for Builders](https://img.shields.io/badge/Built%20For-Builders-FBCA04?style=for-the-badge)
+Our focus is making it easier to build reliable financial applications without repeatedly rebuilding contract integrations, transaction flows, wallet handling, event infrastructure, and application-facing SDK layers.
 
 <br />
 
-**Explore. Contribute. Build with Axionvera.**
+![Stellar](https://img.shields.io/badge/Built%20on-Stellar-7B61FF?style=for-the-badge)
+![Soroban](https://img.shields.io/badge/Smart%20Contracts-Soroban-000000?style=for-the-badge)
+![TypeScript](https://img.shields.io/badge/SDK-TypeScript-3178C6?style=for-the-badge)
+![Rust](https://img.shields.io/badge/Contracts-Rust-DEA584?style=for-the-badge)
+
+<br />
+
+**Build financial products. Integrate faster. Ship on Stellar.**
 
 </div>
 
 ---
 
-## About Axionvera
+## What is Axionvera?
 
-Axionvera is an open-source technology ecosystem focused on building reliable, maintainable, and developer-friendly infrastructure.
+Axionvera is a growing infrastructure layer for digital-finance applications built on Stellar.
 
-Our goal is simple:
+The project focuses on the technical components that repeatedly appear when building real applications on top of smart contracts:
 
-> Build practical open-source systems that are easy to understand, easy to contribute to, and strong enough to evolve over time.
+- typed contract interfaces
+- transaction preparation and submission
+- wallet signing
+- Soroban RPC integration
+- contract error handling
+- event retrieval and decoding
+- reusable application SDKs
+- React integrations
+- payment and reward workflows
+- developer-facing infrastructure
 
-Axionvera is not just about shipping features. It is also about building the structure, tooling, and standards that allow projects to grow without becoming difficult to maintain.
+Instead of every application implementing these systems independently, Axionvera aims to provide reusable building blocks that can support multiple financial products.
+
+---
+
+## The Problem
+
+Building an application on-chain involves much more than writing a smart contract.
+
+A production application also needs to handle:
+
+- wallet connections
+- transaction construction
+- simulation
+- signing
+- submission
+- confirmation
+- RPC communication
+- contract errors
+- event parsing
+- frontend state
+- application-specific abstractions
+
+These layers are often rebuilt for every project.
+
+That creates duplicated work, inconsistent implementations, and more surface area for errors.
+
+Axionvera is building infrastructure that reduces that duplication.
 
 ---
 
 ## What We Are Building
 
-Axionvera focuses on infrastructure that supports developers, contributors, and maintainers across multiple technical areas.
+Axionvera is developing a set of interoperable components around Stellar and Soroban.
 
-| Area | Focus |
+| Layer | Purpose |
 |---|---|
-| SDKs | Developer libraries, integrations, API helpers, and reusable tools |
-| Dashboards | Clean interfaces, frontend architecture, state management, and API integration |
-| Network Systems | Protocol logic, node infrastructure, peer systems, and diagnostics |
-| Automation | GitHub workflows, issue management, PR monitoring, and contributor coordination |
-| Engineering Quality | Testing, refactoring, documentation, and maintainability |
+| Smart Contracts | Financial primitives and application logic deployed through Soroban |
+| Axionvera SDK | Typed TypeScript interfaces for interacting with contracts and Stellar infrastructure |
+| Transaction Infrastructure | Preparation, simulation, signing, submission, and transaction lifecycle handling |
+| Event Infrastructure | Typed Soroban event decoding, retrieval, and pagination |
+| Wallet Infrastructure | Wallet-independent signing and connection abstractions |
+| React Integration | Hooks and providers for application developers |
+| Financial Modules | Payments, campaigns, incentives, rewards, and other programmable-finance workflows |
+| Developer Tooling | Testing, compatibility checks, mocks, configuration, and integration utilities |
+
+These components are designed to work independently while sharing common infrastructure.
+
+---
+
+## Axionvera SDK
+
+The Axionvera SDK is currently the most developed infrastructure layer within the ecosystem.
+
+It is a TypeScript SDK for applications interacting with Stellar and Soroban.
+
+The SDK currently provides infrastructure for:
+
+- typed smart-contract interfaces
+- live Soroban contract reads
+- Soroban transaction preparation
+- transaction simulation
+- wallet signing
+- signed transaction submission
+- transaction result handling
+- contract-specific errors
+- Soroban event decoding
+- live RPC event retrieval
+- event pagination
+- React hooks
+- reusable contract helpers
+- network configuration
+- testing and mocking infrastructure
+
+The objective is to give application developers a higher-level interface while preserving access to lower-level Stellar primitives when needed.
+
+---
+
+## Campaign Infrastructure
+
+One of the first complete vertical integrations built on top of the SDK is the Axionvera Campaign system.
+
+Campaigns provide programmable infrastructure for distributing rewards based on verifiable user activity.
+
+A campaign can define:
+
+- a campaign administrator
+- a reward asset
+- a campaign duration
+- reward rules
+- authorised verifiers
+- per-agent reward limits
+- allocated rewards
+- claimed rewards
+- remaining campaign funds
+
+This creates a reusable primitive for applications that need incentive programmes, referral systems, merchant campaigns, user rewards, or activity-based distributions.
+
+### Current Campaign SDK Coverage
+
+The Campaign integration currently covers the complete public contract interface:
+
+**21 contract methods**
+
+- 9 read methods
+- 12 write methods
+
+It also includes:
+
+- 27 mapped contract error conditions
+- 12 typed event variants
+- live Stellar RPC event retrieval
+- ledger-range event queries
+- cursor-based pagination
+- reward accounting helpers
+- React read hooks
+- React transaction hooks
+- wallet signing
+- transaction submission
+
+---
+
+## Testnet Progress
+
+The Campaign stack has been exercised end-to-end against Stellar testnet.
+
+The verified lifecycle includes:
+
+1. Contract initialization
+2. Campaign creation
+3. Campaign funding
+4. Activation-rule creation
+5. Verifier registration
+6. Reward verification and allocation
+7. Agent reward claiming
+8. Campaign pause
+9. Campaign resume
+10. Campaign close
+11. Withdrawal of unused campaign funds
+12. Post-transaction state reads
+13. Live RPC event retrieval
+14. Typed event decoding
+
+The same lifecycle produced contract events that were retrieved directly through Stellar RPC and decoded through the Axionvera SDK.
+
+This moves the SDK beyond interface definitions and mocks into live Soroban integration.
+
+---
+
+## Built Around Stellar
+
+Stellar is the primary blockchain environment for Axionvera's current financial infrastructure work.
+
+Axionvera uses Stellar for:
+
+- asset movement
+- account-based transactions
+- programmable payments
+- smart contracts through Soroban
+- contract events
+- application settlement
+- financial application infrastructure
+
+Soroban provides the programmable layer used by Axionvera contracts, while Stellar provides the surrounding network, asset, account, and transaction infrastructure.
+
+Axionvera's SDK is intended to make those capabilities easier to integrate into real applications.
+
+---
+
+## Architecture
+
+Axionvera follows a layered architecture.
+
+```text
+Applications
+     │
+     ▼
+React / Product Integrations
+     │
+     ▼
+Axionvera SDK
+     │
+     ├── Contract APIs
+     ├── Transaction Infrastructure
+     ├── Wallet Integration
+     ├── Event Infrastructure
+     └── Network Utilities
+     │
+     ▼
+Stellar RPC + Soroban
+     │
+     ▼
+Axionvera Smart Contracts
+```
+
+The goal is to keep contract logic, network transport, wallet interactions, and application state separated.
+
+This allows each layer to evolve without tightly coupling the entire stack.
 
 ---
 
@@ -51,37 +244,48 @@ Axionvera focuses on infrastructure that supports developers, contributors, and 
 
 <table>
   <tr>
-    <td width="33%">
+    <td width="33%" valign="top">
       <h3>Axionvera SDK</h3>
-      <p>Developer-facing tools and utilities for interacting with the Axionvera ecosystem.</p>
+      <p>
+        Developer infrastructure for interacting with Stellar, Soroban, and
+        Axionvera contracts.
+      </p>
       <ul>
-        <li>SDK architecture</li>
-        <li>API helpers</li>
-        <li>Configuration handling</li>
-        <li>Error handling</li>
-        <li>Regression testing</li>
+        <li>Typed contract APIs</li>
+        <li>Live Soroban reads and writes</li>
+        <li>Wallet signing</li>
+        <li>Transaction submission</li>
+        <li>Event infrastructure</li>
+        <li>React integrations</li>
       </ul>
     </td>
-    <td width="33%">
-      <h3>Axionvera Dashboard</h3>
-      <p>A user-facing and contributor-facing interface for Axionvera tools and services.</p>
+    <td width="33%" valign="top">
+      <h3>Axionvera Contracts</h3>
+      <p>
+        Soroban smart contracts providing reusable financial and application
+        primitives.
+      </p>
       <ul>
-        <li>Frontend architecture</li>
-        <li>Reusable UI components</li>
-        <li>API integration</li>
-        <li>State management</li>
-        <li>Dashboard reliability</li>
+        <li>Campaigns</li>
+        <li>Rewards</li>
+        <li>Financial primitives</li>
+        <li>Contract events</li>
+        <li>Access control</li>
+        <li>Application integrations</li>
       </ul>
     </td>
-    <td width="33%">
-      <h3>Axionvera Network</h3>
-      <p>Protocol, node, and network-level infrastructure for the Axionvera ecosystem.</p>
+    <td width="33%" valign="top">
+      <h3>Axionvera Applications</h3>
+      <p>
+        Products and interfaces built on top of the infrastructure layer.
+      </p>
       <ul>
-        <li>Network architecture</li>
-        <li>Peer and node logic</li>
-        <li>Protocol modules</li>
-        <li>Consensus structure</li>
-        <li>Rust infrastructure</li>
+        <li>Financial applications</li>
+        <li>Wallet experiences</li>
+        <li>Dashboards</li>
+        <li>Payment workflows</li>
+        <li>Campaign interfaces</li>
+        <li>Developer tools</li>
       </ul>
     </td>
   </tr>
@@ -89,182 +293,174 @@ Axionvera focuses on infrastructure that supports developers, contributors, and 
 
 ---
 
-## Ecosystem Projects
+## Engineering Approach
 
-Axionvera also supports related ecosystem projects that explore practical digital finance use cases.
+Axionvera is being developed with an emphasis on infrastructure that can survive beyond a prototype.
 
-These may include work around:
+### Typed interfaces
 
-- Wallet infrastructure
-- Payment flows
-- Smart contracts
-- Mobile experiences
-- Real-world asset workflows
-- Compliance-aware dashboards
-- Developer automation
-- Open-source contributor tooling
+Contract interactions should expose predictable TypeScript interfaces rather than requiring applications to work directly with raw Soroban values.
 
-Each repository has its own README, setup instructions, and contribution guidance.
+### Separation of concerns
 
----
+Contract interaction, transaction submission, wallet signing, events, and frontend state are implemented as separate layers.
 
-## Why Axionvera Exists
+### Real-network validation
 
-Open-source projects can move quickly, but fast-moving codebases can become messy without structure.
+Where possible, SDK functionality is tested not only through mocks but also against deployed Stellar testnet contracts.
 
-Axionvera exists to help solve that by focusing on:
+### Regression protection
 
-| Problem | Axionvera Focus |
-|---|---|
-| Messy codebases | Cleanup, refactoring, and clearer architecture |
-| Weak contributor workflows | Better issues, clearer acceptance criteria, and review structure |
-| Repeated manual work | Automation for maintainers and contributors |
-| Poor maintainability | Documentation, testing, and engineering standards |
-| Inconsistent project structure | Shared patterns across repositories |
+New infrastructure is accompanied by tests covering successful operations, validation behaviour, contract failures, and integration boundaries.
 
-The aim is to build projects that are not only functional, but also understandable, reviewable, and sustainable.
+### Reusable primitives
+
+Infrastructure developed for one contract should be reusable when integrating future contracts.
 
 ---
 
-## Open-Source Philosophy
+## Current Development
 
-Axionvera is built around a simple open-source philosophy:
+Core development of Axionvera is currently being driven directly through the project rather than primarily through external contributor activity.
 
-- Make the codebase easier to understand.
-- Make issues meaningful and well-scoped.
-- Make contributions reviewable.
-- Make testing and documentation part of the work.
-- Make maintainer workflows more consistent.
-- Build systems that improve over time.
+Recent development has focused on establishing the underlying Stellar infrastructure required for more complex products.
 
-We value contributions that improve the long-term health of the project.
+Major areas completed or under active development include:
 
----
+- live Soroban reads
+- live Soroban writes
+- transaction preparation
+- wallet signing
+- transaction submission
+- transaction lifecycle handling
+- typed contract errors
+- contract event infrastructure
+- live RPC event queries
+- React integrations
+- complete Campaign contract support
 
-## Contribution Areas
-
-Contributors can help with:
-
-| Contribution Type | Examples |
-|---|---|
-| Refactoring | Cleaning messy files, improving module boundaries, removing duplication |
-| Testing | Adding regression tests, improving coverage, testing edge cases |
-| Documentation | Improving setup guides, architecture notes, and contributor instructions |
-| Frontend | Improving dashboard structure, reusable components, and UI reliability |
-| Backend / Protocol | Improving network logic, configuration, diagnostics, and protocol modules |
-| Developer Experience | Improving scripts, workflows, errors, and project setup |
-
-Good contributions should be meaningful, clearly scoped, and aligned with the issue requirements.
+The Campaign integration alone is covered as part of a repository regression suite containing more than 700 passing tests.
 
 ---
 
-## Contribution Standards
+## Roadmap
 
-Before opening a pull request, please make sure your contribution:
+Axionvera's next phase is focused on moving from foundational infrastructure toward broader product integrations.
 
-- Solves the issue it is linked to
-- Follows the acceptance criteria
-- Includes tests where relevant
-- Updates documentation where needed
-- Avoids unrelated changes
-- Keeps the implementation clear and maintainable
-- Does not introduce unnecessary complexity
+### Infrastructure
 
-> A merged pull request should improve the project, not just add activity.
+- Extend live SDK support to additional contracts
+- Improve transaction lifecycle and confirmation handling
+- Expand contract event infrastructure
+- Improve wallet integrations
+- Continue strengthening SDK reliability and developer experience
 
----
+### Financial primitives
 
-## Maintainer Tooling
+- Expand campaign and reward infrastructure
+- Build additional reusable financial modules
+- Support richer payment and settlement workflows
+- Explore additional programmable-finance use cases
 
-Axionvera also invests in automation to support maintainers and contributors across multiple repositories.
+### Application layer
 
-This includes tooling for:
+- Build product interfaces around the SDK
+- Improve React integrations
+- Develop reusable wallet and transaction UX
+- Connect financial primitives into complete user workflows
 
-- Issue batch creation
-- Label management
-- Contributor assignment workflows
-- Pull request monitoring
-- CI and review consistency
-- Multi-repository coordination
+### Production readiness
 
-The purpose of this automation is to improve quality, consistency, and maintainability across the ecosystem.
-
----
-
-## Getting Started
-
-To get started:
-
-1. Explore the repositories in the Axionvera organisation.
-2. Read the README for the repository you are interested in.
-3. Check the open issues.
-4. Pick an issue that matches your skills.
-5. Follow the issue requirements and acceptance criteria.
-6. Open a clear pull request.
-7. Include tests and documentation where relevant.
+- Expand network integration testing
+- Strengthen observability and failure handling
+- Improve compatibility testing
+- Prepare selected infrastructure for production deployment
 
 ---
 
-## For Contributors
+## Origins
 
-When submitting a pull request, include:
+Axionvera began as an open-source initiative focused heavily on contribution, experimentation, and creating well-structured repositories that developers could learn from and improve.
 
-- A clear summary of what changed
-- The issue number being solved
-- Relevant screenshots for UI changes
-- Test results or a clear testing explanation
-- Documentation updates where needed
-- Notes on any limitations or follow-up work
+That period helped establish many of the project's engineering principles:
 
-Please avoid submitting low-effort changes, unrelated formatting changes, or pull requests that do not address the issue requirements.
+- clear module boundaries
+- strong documentation
+- meaningful tests
+- maintainable architecture
+- transparent development
+- reusable infrastructure
 
----
+The project has since evolved.
 
-## For Maintainers
+Today, Axionvera is increasingly focused on building its own infrastructure and products, with development driven directly by the project and a stronger emphasis on Stellar-based financial systems.
 
-Maintainers should review contributions based on:
+The open-source foundation remains important, but it is no longer the defining purpose of Axionvera.
 
-| Review Area | What To Check |
-|---|---|
-| Issue alignment | Does the PR solve the stated issue? |
-| Code quality | Is the implementation clean and maintainable? |
-| Tests | Are relevant behaviours covered? |
-| Documentation | Are docs updated where needed? |
-| Security | Does the change introduce risk? |
-| Long-term value | Does this improve the project meaningfully? |
-
-The goal is to keep Axionvera useful, understandable, and sustainable.
+It is part of how the project was built.
 
 ---
 
-## Project Status
+## Why Axionvera?
 
-Axionvera is actively evolving.
+Axionvera's long-term thesis is simple:
 
-Some repositories are focused on feature development, while others are focused on cleanup, refactoring, documentation, and maintainability improvements.
+> Financial applications should not have to rebuild the same blockchain infrastructure every time they launch.
 
-Expect ongoing changes as the ecosystem becomes more structured.
+Smart contracts are only one layer of a working financial product.
+
+Wallets, transactions, errors, events, frontend integrations, network communication, and reusable developer interfaces are equally important.
+
+Axionvera is building those layers together.
 
 ---
 
 ## Vision
 
-Axionvera aims to become a strong open-source foundation for builders working on digital finance tools, protocol infrastructure, automation systems, and developer-first products.
+The long-term goal is to create a reusable infrastructure stack for financial applications built on Stellar.
 
-The long-term vision is to create an ecosystem where contributors can build useful infrastructure, learn through meaningful issues, and help shape maintainable open-source systems.
+A developer should be able to use Axionvera to move from:
+
+```text
+Smart Contract
+```
+
+to:
+
+```text
+Smart Contract
+      ↓
+Typed SDK
+      ↓
+Wallet + Transactions
+      ↓
+Events + Application State
+      ↓
+Production Application
+```
+
+without rebuilding each integration layer from scratch.
+
+As the ecosystem develops, Axionvera aims to support increasingly sophisticated applications across:
+
+- payments
+- rewards
+- incentives
+- programmable financial workflows
+- asset infrastructure
+- financial applications
+- developer platforms
 
 ---
 
 <div align="center">
 
-## Build With Axionvera
+## Building on Stellar
 
-Explore the codebase.  
-Contribute to meaningful issues.  
-Help improve the ecosystem.
+Axionvera is building the infrastructure between smart contracts and real financial applications.
 
 <br />
 
-**Axionvera is open, evolving, and built for builders.**
+**Programmable finance. Developer infrastructure. Built on Stellar.**
 
 </div>
